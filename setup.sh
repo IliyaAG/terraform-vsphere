@@ -1,4 +1,6 @@
-et -e
+#!/usr/bin/env bash
+
+set -e
 
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -16,11 +18,11 @@ if ! command -v terraform &> /dev/null; then
      echo -e "${YELLOW} -> Installing terraform...${RESET}"
      if ! command -v wget &> /dev/null; then
 
-         wget -O- https://apt.releases.hashicorp.com/gpg | \
-             gpg --dearmor | \
-             tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
-             echo -e "${YELLOW} -> wget installed successfully...${RESET}"
-             apt policy terraform
+     wget -O- https://apt.releases.hashicorp.com/gpg | \
+     gpg --dearmor | \
+     tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+     echo -e "${YELLOW} -> wget installed successfully...${RESET}"
 else
     echo -e "${GREEN} -> terraform already installed.${RESET}"
+    apt policy terraform
 fi
