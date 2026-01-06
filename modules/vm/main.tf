@@ -30,8 +30,7 @@ resource "vsphere_virtual_machine" "vm" {
   num_cpus = var.cpu
   memory   = var.memory
 
-  guest_id = data.vsphere_virtual_machine.template.guest_id
-
+  guest_id  = data.vsphere_virtual_machine.template.guest_id
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
 
   network_interface {
@@ -52,16 +51,16 @@ resource "vsphere_virtual_machine" "vm" {
     customize {
       linux_options {
         host_name = var.vm_name
-        domain    = "local"
+        domain    = var.domain
       }
 
       network_interface {
         ipv4_address = var.ipv4
-        ipv4_netmask = 24
+        ipv4_netmask = var.ipv4_netmask
       }
 
-      ipv4_gateway = var.gateway
-      dns_server_list = var.dns
+      ipv4_gateway     = var.gateway
+      dns_server_list  = var.dns
     }
   }
 }
